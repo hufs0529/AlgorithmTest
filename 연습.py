@@ -1,22 +1,14 @@
-n, m = map(int, input().split())
-six_list = []
-one_list = []
-money = 0
-nMin = 1e9
+n = int(input())
+k = int(input())
+s = list(map(int, input().split()))
+s.sort()
+dist = []
 
-for _ in range(m):
-  a, b = map(int, input().split())
-  six_list.append(a)
-  one_list.append(b)
-six_list.sort()
-one_list.sort()
-  
-  
-if six_list[0] <= one_list[0] * 6:
-  money = six_list[0] * (n // 6) + one_list[0] * (n%6)
-  if six_list[0] < one_list[0] * (n % 6):
-    money = six_list[0] * (n//6 + 1)
-else:
-  money = one_list[0] * n
-  
-print(money)
+for i in range(1, n):
+  dist.append(abs(s[i] - s[i-1]))
+dist.sort(reverse=True)
+
+for _ in range(k-1):
+  dist.pop(0)
+
+print(sum(dist))
