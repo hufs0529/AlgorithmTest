@@ -10,5 +10,5 @@ dist.sort(reverse=True)
 
 for _ in range(k-1):
   dist.pop(0)
-
+cnt = 0
 print(sum(dist))
