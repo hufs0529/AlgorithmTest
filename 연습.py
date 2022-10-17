@@ -1,14 +1,12 @@
-n = int(input())
-k = int(input())
-s = list(map(int, input().split()))
-s.sort()
-dist = []
+a = input()
+b = input()
 
-for i in range(1, n):
-  dist.append(abs(s[i] - s[i-1]))
-dist.sort(reverse=True)
-
-for _ in range(k-1):
-  dist.pop(0)
 cnt = 0
-print(sum(dist))
+n = 0
+while n <= len(a) - len(b):
+  if a[n:n+len(b)] == b:
+    cnt += 1
+    n += len(b)
+  else:
+    n += 1
+print(cnt)
