@@ -1,4 +1,4 @@
-target = int(input())
+target = int(input()) #
 m = int(input())
 broken = list(map(int, input().split()))
 
