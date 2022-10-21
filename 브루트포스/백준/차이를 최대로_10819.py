@@ -1,5 +1,6 @@
 from itertools import permutations
 
+
 n = int(input())
 s = list(map(int, input().split()))
 
