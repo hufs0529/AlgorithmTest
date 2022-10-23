@@ -7,7 +7,6 @@ s = []
 for _ in range(n):
   s.append(list(map(int, input())))
   
-cnt = 0
 
 def bfs(xx, yy):
   queue = deque()
