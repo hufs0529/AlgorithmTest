@@ -1,27 +1,18 @@
-from collections import deque
-
-dx = [0, 0, 1, -1]
-dy = [-1, 1, 0, 0]
-n, m = map(int, input().split())
-s = []
+n = int(input())
+m = int(input())
+graph = [[]*n for _ in range(n+1)]
 for _ in range(n):
-  s.append(list(map(int, input())))
+  a, b = map(int, input().split())
+  graph[a].append(b)
+  graph[b].append(a)
   
 cnt = 0
+visited = [0] * (n+1)
 
-def bfs(xx, yy):
-  queue = deque()
-  queue.append((xx, yy))
-  while queue:
-    x, y = queue.popleft()
-    for i in range(4):
-      nx = x + dx[i]
-      ny = y + dy[i]
-      if 0 <= nx < n and 0 <= ny < m:
-        if s[nx][ny] == 1:
-          s[nx][ny] = s[x][y] + 1
-          queue.append((nx, ny))
-          
-  return s[n-1][m-1]
-
-print(bfs(0, 0))
+def dfs(start):
+  global cnt
+  visited[start] = 1
+  for i in graph[start]:
+    if visited[i] == 0:
+      cnt += 1
+      dfs(i)
