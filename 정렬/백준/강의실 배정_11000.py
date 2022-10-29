@@ -17,4 +17,4 @@ for i in range(1, n):
     heapq.heappop(heap)
     heapq.heappush(heap, q[i][1])
     
-print(len(heap))
+print((heap))
