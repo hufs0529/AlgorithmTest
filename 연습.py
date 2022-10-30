@@ -2,6 +2,7 @@ import heapq
 
 n = int(input())
 q = []
+f = 0
 for _ in range(n):
   start, end = map(int, input().split())
   q.append([start, end])
