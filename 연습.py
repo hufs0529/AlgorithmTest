@@ -1,21 +1,13 @@
-import heapq
-
 n = int(input())
-q = []
-f = 0
-for _ in range(n):
-  start, end = map(int, input().split())
-  q.append([start, end])
-  
-q.sort()
-heap = []
-heapq.heappush(heap, q[0][1])
-
-for i in range(1, n):
-  if q[i][0] < heap[0]:
-    heapq.heappush(heap, q[i][1])
-  else:
-    heapq.heappop(heap)
-    heapq.heappush(heap, q[i][1])
-    
-print(len(heap))
+s = list(map(int, input().split()))
+ans = [0] * n
+for i in range(1, n+1):
+  t = s[i-1]
+  cnt = 0
+  for j in range(n):
+    if cnt == t and ans[j] == 0:
+      ans[j] = i
+      break
+    elif ans[j] == 0:
+      cnt += 1
+print(*ans)
