@@ -19,5 +19,4 @@ while True:
   
   if not bridge:
     break
-  
 print(time)
