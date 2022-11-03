@@ -1,19 +1,18 @@
 from itertools import combinations
 
 L, C = map(int, input().split())
+vowels = ['a','e','o','u']
 chars = sorted(list(map(str, input().split())))
-res = []
-vowels = ['a','e','i','o','u']
+res = 0
 
-for char in list(combinations(chars, L)):
-  vc, cc = 0, 0
-  for c in char:
-    if c in vowels:
-      vc += 1
+for c in list(combinations(chars, L)):
+  vo, co = 0, 0
+  for char in c:
+    if char in vowels:
+      vo += 1
     else:
-      cc += 1
-  if vc >0 and cc > 1:
-    res.append(''.join(char))
+      co += 1
+  if vo > 0 and co > 1:
+    res.append(''.join(c))
     
-for r in res:
-  print(r)
+    
