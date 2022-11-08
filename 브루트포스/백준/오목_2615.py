@@ -26,7 +26,7 @@ def omok():
             
             nx += dx[i]
             ny += dy[i] 
-  return 0, -1, 1
+  return 0, -1, -1
 
 color, x, y = omok()
 if not color:
