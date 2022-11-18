@@ -19,5 +19,5 @@ for i in range(vote):
     score.append(1)
     picture.append(students[i])
     
-picture.sort()
+picture.sort(reverse=True)
 print(' '.join(map(str, picture)))
