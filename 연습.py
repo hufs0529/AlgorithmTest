@@ -1,19 +1,15 @@
-from itertools import combinations
-from collections import Counter
+D, K = map(int, input().split())
 
-n = int(input())
-s = list(map(int, input().split()))
+dp = [] * D
 
-sum_list = []
-for i in range(1, n+1):
-  com = list(combinations(s, i))
-  for j in com:
-    sum_list.append(sum(j))
-
-sum_list.sort()
-
-check_num = [i for i in range(1, sum_list[-1]+2)]
-
-result = Counter(check_num) - Counter(sum_list)
-
-print(list(result.keys())[0])
+for i in range(1, K//2+1):
+  for j in range(i+1, K):
+    dp[0] = i
+    dp[1] = j
+    for k in range(2, D):
+      dp[k] = dp[k-1] + dp[i-2]
+      
+    if dp[D-1] == K:
+      print(dp[0])
+      print(dp[1])
+      break
