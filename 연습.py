@@ -12,4 +12,4 @@ for i in range(1, K//2+1):
     if dp[D-1] == K:
       print(dp[0])
       print(dp[1])
-      break
+      
