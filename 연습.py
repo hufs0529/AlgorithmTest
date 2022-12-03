@@ -1,7 +1,7 @@
 dx = [0, 0, -1, 1]
 dy = [-1, 1, 0, 0]
 n, m = map(int, input().split())
-s = []
+s = [
 for _ in range(n):
   s.append(list(map(int, input().split())))
 dp = [[0 for i in range(n + 1)] for i in range(n + 1)]
