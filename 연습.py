@@ -1,16 +1,16 @@
-A = [""] + list(input().rstrip())
-B = [""] + list(input().rstrip())
-LCS = [[""]*len(B) for _ in range(len(A))]
+import heapq
 
-for i in range(1, len(A)):
-    for j in range(1, len(B)):
-        if A[i] == B[j]:
-            LCS[i][j] = LCS[i-1][j-1] + A[i]
-        else:
-            if len(LCS[i-1][j]) >= len(LCS[i][j-1]):
-                LCS[i][j] = LCS[i-1][j]
-            else:
-                LCS[i][j] = LCS[i][j-1]
+n = int(input())
+s = []
+heap = []
 
-result = LCS[-1][-1]
-print(len(result), result, sep="\n")
+for _ in range(n):
+    s.append(list(map(int, input().split())))
+    
+    if not heap:
+        for s1 in s:
+            heapq.heappush(heap, s1)
+    else:
+        if heap[0] < s1:
+            heapq.heappop()
+            heapq.heappush(heap, s1)
