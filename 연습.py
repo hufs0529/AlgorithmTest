@@ -1,16 +1,18 @@
-import heapq
-
 n = int(input())
-s = []
-heap = []
+m = int(input())
+s = list(map(int, input().split()))
+s.sort()
+cnt = 0
+i, j = 0, n-1
 
-for _ in range(n):
-    s.append(list(map(int, input().split())))
-    
-    if not heap:
-        for s1 in s:
-            heapq.heappush(heap, s1)
+while i < j:
+    if s[i] + s[j] == m:
+        cnt += 1
+        i += 1
+        j -= 1
+    elif s[i] + s[j] < m:
+        i += 1
     else:
-        if heap[0] < s1:
-            heapq.heappop()
-            heapq.heappush(heap, s1)
+        j -= 1
+        
+print(cnt)
