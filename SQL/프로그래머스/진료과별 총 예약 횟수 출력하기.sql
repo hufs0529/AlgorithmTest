@@ -1,0 +1,5 @@
+select MCDP_CD as 진료과코드, COUNT(MCDP_CD) AS '5월예약건수'
+from APPOINTMENT 
+WHERE MONTH(APNT_YMD) = 5
+group by 진료과코드
+ORDER BY COUNT(MCDP_CD) ASC, MCDP_CD ASC;
