@@ -32,5 +32,6 @@ for i in range(n-1):
                         break
 
 
+
 for i in arr:
     print(i)
