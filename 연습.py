@@ -25,7 +25,7 @@ for k in range(0, len(minus_walk), m):
     if minus_walk[k] != max_walk:
         walking += abs(minus_walk[k])
         
-walking *= 2
+walking *=2
 walking += abs(max_walk)
 
 print(walking)
