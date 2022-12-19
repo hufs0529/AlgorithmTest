@@ -1,27 +1,19 @@
-def dfs(depth, start):
-    global result
-    if depth == len_:
-        sour = 1
-        bitter = 0
-        for i in arr:
-            sour *= i[0]
-            bitter += i[1]
-        if abs(sour - bitter) < result:
-            result = abs(sour - bitter)
+n, k = map(int, input().split())
+s = list(map(int, input().split()))
+cnt = 0
+check = [0] * n
+
+def dfs(depth, t):
+    global cnt
+    if depth == n:
+        cnt += 1
         return
-    for i in range(start, n):
-        arr.append(s[i])
-        dfs(depth+1, i+1)
-        arr.pop()
+    for i in range(n):
+        if check[i] and t+s[i]-k<0:
+            continue
+        check[i]=1
+        dfs(depth+1, t+s[i]-k)
+        check[i]=0
         
-        
-n = int(input())
-s = []
-arr = []
-result = 999
-for _ in range(n):
-    s.append(list(map(int, input().split())))
-    
-for i in range(1, n+1):
-    len_ = i
-    dfs(0, 0)
+dfs(0,0)     
+print(cnt)
