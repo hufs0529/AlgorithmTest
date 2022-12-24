@@ -1,13 +1,36 @@
-a = input().split('-')
-num = []
-for i in a:
-    cnt = 0
-    s = i.split('+')
-    for j in s:
-        cnt += int(j)
-    num.append(cnt)
-    
-n = num[0]
-for i in range(1, len(num)):
-    n -= num[i]
-print(n)
+s = list(input())
+answer = 0
+tmp = 1
+stack = []
+
+for i in range(len(s)):
+    if s[i] == '(':
+        stack.append(s[i])
+        tmp*= 2
+        
+    elif s[i] == '[':
+        stack.append(s[i])
+        tmp*= 3
+        
+    elif s[i] == ')':
+        if not stack or stack[-1] == ']':
+            answer = 0
+            break
+        if s[i-1] == '(':
+            answer += tmp
+        stack.pop()
+        tmp //= 2
+        
+    elif s[i] == ']':
+        if not stack or stack[-1] == ')':
+            answer = 0
+            break
+        if s[i-1] == '[':
+            answer += tmp
+        stack.pop()
+        tmp //= 3
+        
+if stack:
+    print(0)
+else:
+    print(answer)
