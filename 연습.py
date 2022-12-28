@@ -1,36 +1,9 @@
-s = list(input())
-answer = 0
-tmp = 1
-stack = []
+from itertools import combinations
 
-for i in range(len(s)):
-    if s[i] == '(':
-        stack.append(s[i])
-        tmp*= 2
-        
-    elif s[i] == '[':
-        stack.append(s[i])
-        tmp*= 3
-        
-    elif s[i] == ')':
-        if not stack or stack[-1] == ']':
-            answer = 0
-            break
-        if s[i-1] == '(':
-            answer += tmp
-        stack.pop()
-        tmp //= 2
-        
-    elif s[i] == ']':
-        if not stack or stack[-1] == ')':
-            answer =0
-            break
-        if s[i-1] == '[':
-            answer += tmp
-        stack.pop()
-        tmp //= 3
-        
-if stack:
+while True:
+    n, k = map(int, input().split())
+    
+    arr = [i for i in range(1, n+1)]
+    
+    #print(list(map(''.join(combinations(arr, k)))))
     print()
-else:
-    print(answer)
