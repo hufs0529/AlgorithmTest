@@ -1,10 +1,11 @@
 from collections import deque
+
 n, m = map(int, input().split())
 s = list(map(int, input().split()))
 
-cnt = 0
 queue = deque([i for i in range(1, n+1)])
 
+cnt = 0
 for i in s:
     while True:
         if queue[0] == i:
@@ -19,4 +20,5 @@ for i in s:
                 while queue[0] != i:
                     queue.appendleft(queue.pop())
                     cnt += 1
+                    
 print(cnt)
