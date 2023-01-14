@@ -1,23 +1,13 @@
-words = list(input())
-cursor = len(words)
-n = int(input())
+a = input()
+b = input()
+h, w = len(a), len(b)
+dp = [[0] * (w+1) for _ in range(h+1)]
 
-for _ in range(n):
-    s = list(input().split())
-    if s[0] == 'P':
-        words.insert(cursor, s[1])
-        cursor += 1
-        
-    elif s[0] == 'L':
-        if cursor > 0:
-            cursor -= 1
+for i in range(1, h+1):
+    for j in range(1, w+1):
+        if a[i-1] == b[j-1]:
+            dp[i][j] = dp[i-1][j-1] + 1
+        else:
+            dp[i][j] = max(dp[i][j-1], dp[i-1][j])
             
-    elif s[0] == 'D':
-        if cursor < len(words):
-            cursor += 1
-            
-    else:
-        if cursor > 0:
-            words.remove(words[cursor-1])
-            
-print(''.join(words))
+print(dp[-1][-1])
