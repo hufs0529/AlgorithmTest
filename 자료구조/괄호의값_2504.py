@@ -20,7 +20,7 @@ for i in range(len(s)):
         stack.pop()
         tmp //= 2
         
-    else:
+    else:   
         if not stack or stack[-1] == '(':
             ans = 0
             break
