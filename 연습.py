@@ -1,26 +1,12 @@
 n = int(input())
-s = list(map(int, input().split()))
-s.sort()
-final = []
+s = {}
 
-left, right = 0, n-1
-answer = 1e9
-
-while left < right:
-    s_left = s[left]
-    s_right = s[right]
-    
-    tot = s_left + s_right
-    
-    if abs(tot) < answer:
-        answer = abs(tot)
-        final = [s_left, s_right]
-        
-    if tot < 0:
-        left += 1
+for _ in range(n):
+    num = int(input())
+    if num in s:
+        s[num] += 1
     else:
-        right -= 1
+        s[num] = 1
         
-    
-print(final[0], final[1])    
-    
+result = sorted(s.items(), key=lambda x:(-x[1],x[0]))
+print(result[0][0])
