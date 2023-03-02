@@ -1,24 +1,26 @@
-st1 = list(input().split())
-st2 = []
 n = int(input())
+s = list(map(int, input().split()))
+s.sort()
+final = []
 
-for _ in range(n):
-    command = input().split()
-    if command[0] == 'L':
-        if st1:
-            st2.append(st1.pop())
+left, right = 0, n-1
+answer = 1e9
+
+while left < right:
+    s_left = s[left]
+    s_right = s[right]
     
-    elif command[0] == 'D':
-        if st2:
-            st1.append(st2.pop())
-            
-    elif command[0] == 'B':
-        if st1:
-            st1.pop()
-            
-    else:
-        st1.append(command[1])
+    tot = s_left + s_right
+    
+    if abs(tot) < answer:
+        answer = abs(tot)
+        final = [s_left, s_right]
         
-st1.extend(reversed(st2))
-
-print(''.join(st1))
+    if tot < 0:
+        left += 1
+    else:
+        right -= 1
+        
+    
+print(final[0], final[1])    
+    
