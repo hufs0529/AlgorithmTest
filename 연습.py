@@ -9,4 +9,4 @@ for _ in range(n):
         s[num] = 1
         
 result = sorted(s.items(), key=lambda x:(-x[1],x[0]))
-print(result[0][0])
+print(result[0][0])   
