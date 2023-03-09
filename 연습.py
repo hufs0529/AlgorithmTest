@@ -1,17 +1,12 @@
-x, y = map(int, input().split())
-z = (y * 100) // x
-if z >= 99:
-    print(-1)
-else:
-    ans = 0
-    left = 1
-    right = x
+n = int(input())
+k = int(input())
+s = list(map(int, input().split()))
+s.sort()
+
+arr = []
+for i in range(n-1):
+    arr.append(s[i+1] - s[i])
     
-    while left <= right:
-        mid = (left + right) // 2
-        if (y + mid)*100 // (x + mid) <= z:
-            left = mid + 1
-        else:
-            ans = mid
-            right = mid - 1
-    print(ans)
+arr.sort()
+
+print(sum(arr[:n-k]))
