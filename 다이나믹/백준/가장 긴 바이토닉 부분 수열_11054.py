@@ -11,7 +11,7 @@ for i in range(n):
     for j in range(i):
         if s[i] > s[j]:
             dp1[i] = max(dp1[i], dp1[j]+1)
-            
+ 
 s.reverse()
 
 for i in range(n):
