@@ -1,17 +1,13 @@
-import heapq
+n, k = map(int, input().split())
 
-n = int(input())
-s = []
-res = 0
-for _ in range(n):
-  heapq.heappush(s, int(input()))
+result = 1
+
+for i in range(k):
+  result *= n
+  n -= 1
   
-if len(s) == 1:
-  print(0)
-else:
-  while len(s) > 1:
-    plus = heapq.heappop(s) + heapq.heappop(s)
-    res += plus
-    heapq.heappush(s, plus)
-    
-  print(res)
+divisor = 1
+for i in range(2, k+1):
+  divisor *= i
+  
+print((result // divisor) % 10007)
