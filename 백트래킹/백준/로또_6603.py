@@ -1,7 +1,7 @@
 def dfs(start, depth):
   if depth == 6:
     for i in range(6):
-      print(comb[i], end='')
+      print(comb[i], end=' ')
     print()
     return
   for i in range(start, len(s)):
