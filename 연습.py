@@ -1,14 +1,29 @@
-n, m = map(int, input().split())
-s = []
-dp = [[0 for i in range(n+1)]for i in range(n+1)]
-for _ in range(n):
-  s.append(list(map(int, input().split())))
+from itertools import combinations
+from bisect import bisect_left, bisect_right
+
+def getNum(arr, find):
+  return bisect_right(arr, find) - bisect_left(arr, find)
+
+def getSum(arr, sumArr):
+  for i in range(1, len(arr) + 1):
+    for a in combinations(arr, i):
+      sumArr.append(sum(a))
+  sumArr.sort()
+
+n, s = map(int, input().split())
+arr = list(map(int, input().split()))
+
+left, right = arr[:n//2], arr[n//2:]
+leftSum, rightSum = [], []
+
+getSum(left, leftSum)
+getSum(right, rightSum)
+ans = 0
+for l in leftSum:
+  find = s - l
+  ans += getNum(rightSum, find)
   
-for i in range(n):
-  for j in range(n):
-    dp[i+1][j+1] = dp[i][j+1] + dp[i+1][j] - dp[i][j] + s[i][j]
-    
-for i in range(m):
-  x1, y1, x2, y2 = map(int, input().split())
-  print(dp[x2][y2] - dp[x1-1][y2] - dp[x2][y1-1] + dp[x1-1][y1-1])
-  
+ans += getNum(leftSum, s)
+ans += getNum(rightSum, s)
+
+print(ans)
