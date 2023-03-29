@@ -13,6 +13,6 @@ for case in cases:
             if lis[mid] < case:
                 left = mid + 1
             else:
-                right = mid
+                right = mid 
         lis[right] = case
 print(len(lis) - 1)
