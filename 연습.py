@@ -33,6 +33,7 @@ for i in range(n):
         if graph[i][j] == 1 and not visited[i][j]:
             cnt += 1
             max_each_count = max(max_each_count, bfs(i,j))
+           
             
 print(cnt)
 print(max_each_count)
