@@ -10,21 +10,24 @@ def dfs(x, y):
     
     if 0 <= nx < n and 0 <= ny < m:
       if graph[nx][ny] == 1:
-        graph[nx][ny] = 0
         dfs(nx, ny)
+        graph[nx][ny] = 0
+        
 
 for _ in range(t):
   cnt = 0
   m, n, k = map(int, input().split())
-  graph = [[0] * m for _ in range(n)]
+  graph = [[0] * (n) for _ in range(m)]
   
   for j in range(k):
     x, y = map(int, input().split())
-    graph[y][x] = 1
+    graph[x][y] = 1
   
-  for a in range(n):
-    for b in range(m):
+  for a in range(m):
+    for b in range(n):
       if graph[a][b] == 1:
         dfs(x, y)
         cnt += 1
   print(cnt)
+  
+  
