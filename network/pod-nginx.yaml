@@ -1,21 +1,57 @@
+# deploy
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
 metadata:
-  name: rs-nginx
+  labels:
+    app: nginx
+  name: nginx-pod
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: webui
+      app: nginx
   template:
     metadata:
-      name: nginx-pod
-      labels: 
-        app: webui
+      name: nginx
+      labels:
+        app: nginx
     spec:
       containers:
-      - name: nginx-container
-        image: nginx: 1.14
+      - image: nginx
+        name: nginx
         ports:
         - containerPort: 80
-          protocol: TCP
+
+# service
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  labels:
+    app: nginx
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nginx
+
+
+# service + nodeport
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+  labels:
+    app: nginx
+spec:
+  type: NodePort
+  ports:
+  - nodePort: 31000
+    port: 8080
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: nginx
+  
