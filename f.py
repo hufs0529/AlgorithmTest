@@ -29,8 +29,8 @@ def collect_stock_data():
 def store_stock_data_to_s3():
     s3 = boto3.client(service_name="s3",
                       region_name="ap-northeast-2",
-                      aws_access_key_id='AKIAXB4DAQ3ZAAECZ5OO',
-                      aws_secret_access_key='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')
+                      aws_access_key_id='',
+                      aws_secret_access_key='')
     
     data = collect_stock_data()
     bucket_name = 'airflow-stock'
