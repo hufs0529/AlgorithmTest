@@ -1,8 +1,21 @@
-s = input()
+from collections import deque
 
-cnt = 0
-for i in range(len(s)-1):
-  if s[i] != s[i+1]:
-    cnt += 1
-
-print((cnt+1)//2)
+t = int(input())
+for _ in range(t):
+  n, m = map(int, input().split())
+  queue = deque(list(map(int, input().split())))
+  cnt = 0
+  while queue:
+    best = max(queue)
+    front = queue.popleft()
+    m -= 1
+    
+    if best == front:
+      cnt += 1
+      if m < 0:
+        print(cnt)
+        break
+    else:
+      queue.append(front)
+      if m < 0:
+        m = len(queue) - 1
