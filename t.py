@@ -1,12 +1,20 @@
-n, p, q = map(int, input().split())
-dict = {}
-dict[0] = 1
+n, c = map(int, input().split())
+seq = list(map(int, input().split()))
+count = {}
+idx = 1
+for s in seq:
+    if s in count:
+        count[s][0] += 1
+    else:
+        count[s] = [1, idx]
+        idx += 1
 
-def sol(n):
-  if n in dict:
-    return dict[n]
-  else:
-    dict[n] = sol(n//p) +  sol(n//q)
-    return dict[n]
-  
-print(sol(n))
+numbers = [[i, j] for i, j in count.items()]
+numbers.sort(key=lambda x: (-x[1][0], x[1][1]))
+print(numbers)
+res = []
+for i, j in numbers:
+    res += [i] * j[0]
+
+
+print(*res)
