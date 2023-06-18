@@ -1,20 +1,28 @@
-n, c = map(int, input().split())
-seq = list(map(int, input().split()))
-count = {}
-idx = 1
-for s in seq:
-    if s in count:
-        count[s][0] += 1
+n = int(input())
+arr = list(map(int, input().split(" ")))
+arr.sort()
+
+left = 0
+right = n - 1
+
+answer = abs(arr[left] + arr[right])
+final = [arr[left], arr[right]]
+
+
+while left < right:
+    left_val = arr[left]
+    right_val = arr[right]
+
+    sum = left_val + right_val
+
+    if abs(sum) < answer:
+        answer = abs(sum)
+        final = [left_val, right_val]
+        if answer == 0:
+            break
+    if sum < 0:
+        left += 1
     else:
-        count[s] = [1, idx]
-        idx += 1
+        right -= 1
 
-numbers = [[i, j] for i, j in count.items()]
-numbers.sort(key=lambda x: (-x[1][0], x[1][1]))
-print(numbers)
-res = []
-for i, j in numbers:
-    res += [i] * j[0]
-
-
-print(*res)
+print(final[0], final[1])
