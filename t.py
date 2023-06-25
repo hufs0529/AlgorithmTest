@@ -1,26 +1,16 @@
-from bisect import bisect_left
+n, k = int(input()), int(input())
+start, end = 1, k
 
-n, H = map(int, input().split())
-cave = [int(input()) for _ in range(n)]
+while start <= end:
+    mid = (start + end) // 2
+    tmp = 0
 
-top, bot = [], []
-for i in range(n):
-    if i % 2 == 0:
-        bot.append(cave[i])
+    for i in range(1, n + 1):
+        tmp += min(mid // i, n)
+
+    if tmp >= k:
+        answer = mid
+        end = mid - 1
     else:
-        top.append(cave[i])
-
-top.sort()
-bot.sort()
-cnt = 1
-min_val = float("inf")
-for h in range(1, H + 1):
-    t, b = bisect_left(top, (H + 1) - h), bisect_left(bot, h)
-    total = n - (t + b)
-    if total < min_val:
-        min_val = total
-        cnt = 1
-    elif total == min_val:
-        cnt += 1
-
-print(min_val, cnt)
+        start = mid + 1
+print(answer)
