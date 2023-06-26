@@ -1,16 +1,33 @@
-n, k = int(input()), int(input())
-start, end = 1, k
+shields = input()
+stack = []
+ans = 0
+tmp = 1
 
-while start <= end:
-    mid = (start + end) // 2
-    tmp = 0
+for i in range(len(shields)):
+    if shields[i] == "(":
+        tmp *= 2
+        stack.append(shields[i])
+    elif shields[i] == "[":
+        tmp *= 3
+        stack.append(shields[i])
+    elif shields[i] == ")":
+        if not stack or stack[-1] == "[":
+            ans = 0
+            break
+        if shields[i - 1] == "(":
+            ans += tmp
+        stack.pop()
+        tmp //= 2
+    elif shields[i] == "]":
+        if not stack or stack[-1] == "(":
+            ans = 0
+            break
+        if shields[i - 1] == "[":
+            ans += tmp
+        stack.pop()
+        tmp //= 3
 
-    for i in range(1, n + 1):
-        tmp += min(mid // i, n)
-
-    if tmp >= k:
-        answer = mid
-        end = mid - 1
-    else:
-        start = mid + 1
-print(answer)
+if stack:
+    print(0)
+else:
+    print(ans)
