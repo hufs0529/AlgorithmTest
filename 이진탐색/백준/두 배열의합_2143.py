@@ -20,7 +20,7 @@ for i in range(m):
     for j in range(i + 1, m):
         s += b[j]
         Bsum.append(s)
-
+print(Bsum)
 Asum.sort()
 Bsum.sort()
 ans = 0
@@ -29,5 +29,3 @@ for i in range(len(Asum)):
     l = bisect.bisect_left(Bsum, t - Asum[i])
     r = bisect.bisect_right(Bsum, t - Asum[i])
     ans += r - l
-
-print(ans)
