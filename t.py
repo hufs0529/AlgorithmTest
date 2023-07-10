@@ -1,18 +1,26 @@
+from collections import deque
+
 n = int(input())
+m = int(input())
+visited = [False] * (n+1)
+graph = [[]*n for _ in range(n+1)]
 
-dp = [[0] * 10 for _ in range(n + 1)]
-for i in range(1, 10):
-    dp[1][i] = 1
+for _ in range(m):
+    a,b = map(int,input().split())
+    graph[a].append(b)
+    graph[b].append(a)
 
-MOD = 1000000000
+def bfs(x):
+	queue = deque([x])
+	cnt = 0
+	visited[x] = True
+	while queue:
+		q = queue.popleft()
+		for i in graph[q]:
+			if not visited[i]:
+				visited[i] = True
+				queue.append(i)
+				cnt += 1
+	return cnt
 
-for i in range(2, n + 1):
-    for j in range(10):
-        if j == 0:
-            dp[i][j] = dp[i - 1][1]
-        elif j == 9:
-            dp[i][j] = dp[i - 1][8]
-        else:
-            dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j + 1]
-
-print(sum(dp[n]) * MOD)
+print(bfs(1))
