@@ -1,18 +1,10 @@
-n = int(input())
+from collections import deque
 
-dp = [[0] * 10 for _ in range(n + 1)]
-for i in range(1, 10):
-    dp[1][i] = 1
+dx = [0, 0, -1, 1]
+dy = [-1, 1, 0, 0]
 
-MOD = 1000000000
-
-for i in range(2, n + 1):
-    for j in range(10):
-        if j == 0:
-            dp[i][j] = dp[i - 1][1]
-        elif j == 9:
-            dp[i][j] = dp[i - 1][8]
-        else:
-            dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j + 1]
-
-print(sum(dp[n]) * MOD)
+t = int(input())
+for _ in range(t):
+    cnt = 0
+    m, n, k = map(int, input().split())
+    field = [[0] * m for _ in range(n)]
