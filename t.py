@@ -1,26 +1,16 @@
-from collections import deque
-
 n = int(input())
-m = int(input())
-visited = [False] * (n+1)
-graph = [[]*n for _ in range(n+1)]
+tree = list(map(int, input().split()))
+erase = int(input())
 
-for _ in range(m):
-    a,b = map(int,input().split())
-    graph[a].append(b)
-    graph[b].append(a)
+def dfs(v):
+	tree[v] = -2
+	for i in range(n):
+		if v == tree[i]:
+			dfs(i)
+dfs(erase)
+cnt = 0
 
-def bfs(x):
-	queue = deque([x])
-	cnt = 0
-	visited[x] = True
-	while queue:
-		q = queue.popleft()
-		for i in graph[q]:
-			if not visited[i]:
-				visited[i] = True
-				queue.append(i)
-				cnt += 1
-	return cnt
+for i in range(n):
+	if tree[i] == -2 and i not in tree:
+		cnt += 1
 
-print(bfs(1))
