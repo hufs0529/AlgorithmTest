@@ -1,35 +1,23 @@
-from collections import deque
-
-dx = [0, 0, -1, 1]
-dy = [-1, 1, 0, 0]
-
 n, m = map(int, input().split())
-graph = []
+s = []
 for _ in range(n):
-	graph.append(list(map(int, input().split())))
+	s.append(int(input()))
 
-def bfs(a, b):
+start, end = min(s), max(s)
+
+while start <= end:
+	mid = (start + end) // 2
+	charge = mid
+	num = 1
 	for i in range(n):
-		for j in range(m):
-			if graph[i][j] == 2:
-				queue.append((i, j))
+		if charge < s[i]:
+			charge = mid
+			num += 1
+		charge -= s[i]
 	
-	while queue:
-		x, y = queue.popleft()
-		for i in range(4):
-			nx = x + dx[i]
-			ny = y + dy[i]
-			if 0 <= nx < n and 0 <= ny < m and graph[nx][n] == 0:
-				graph[nx][ny] = 2
-				queue.append([nx, ny])
-	
-	global result
-	cnt = 0
-	for i in range(n):
-		for j in range(m):
-			if graph[i][j] == 0:
-				cnt += 1
-	result = max(result, cnt)
-
-
-result = 0
+	if num > m or mid < max(s):
+		start = mid + 1
+	else:
+		end = mid - 1
+		k = mid
+print(k)
