@@ -14,10 +14,9 @@ while start <= end:
 			charge = mid
 			num += 1
 		charge -= s[i]
-	
+
 	if num > m or mid < max(s):
 		start = mid + 1
 	else:
 		end = mid - 1
-		k = mid
-print(k)
+print(mid)
