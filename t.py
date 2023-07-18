@@ -1,22 +1,24 @@
-n, m = map(int, input().split())
-s = []
-for _ in range(n):
-	s.append(int(input()))
+dx = [-1, 1, 0, 0]
+dy = [0, 0, -1, 1]
 
-start, end = min(s), max(s)
+r, c = map(int, input().split())
+board = []
+for _ in range(r):
+	board.append(list(input()))
+ans = 0
+alpha = set()
 
-while start <= end:
-	mid = (start + end) // 2
-	charge = mid
-	num = 1
-	for i in range(n):
-		if charge < s[i]:
-			charge = mid
-			num += 1
-		charge -= s[i]
+def dfs(x, y, count):
+	global ans
+	ans = max(ans, count)
+	for i in range(4):
+		nx = x + dx[i]
+		ny = y + dy[i]
+		if 0 <= nx < r and 0 <= ny < c and not board[nx][ny] in alpha:
+			alpha.add(board[nx][ny])
+			dfs(nx, ny, count+1)
+			alpha.remove(board[nx][ny])
 
-	if num > m or mid < max(s):
-		start = mid + 1
-	else:
-		end = mid - 1
-print(mid)
+alpha.add(board[0][0])
+dfs(0,0,1)
+print(ans)
