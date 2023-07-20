@@ -1,24 +1,18 @@
-from bisect import bisect_left
+n, k = map(int, input().split())
+stuff = [[0, 0]]
+knapsack = [[0 for _ in range(k+1)] for _ in range(n+1)]
 
-n, h = map(int, input().split())
-down, up = [], []
+for _ in range(n):
+	stuff.append(list(map(int, input().split())))
 
-for i in range(n):
-	if i%2 == 0:
-		down.append([int(input())])
-	else:
-		up.append([int(input())])
+for i in range(1, n+1):
+	for j in range(1, k+1):
+		weight = stuff[i][0] 
+		value = stuff[i][1]
 
-down.sort()
-up.sort()
-cnt = 1
+		if j < weight:
+			knapsack[i][j] = knapsack[i-1][j]
+		else:
+			knapsack[i][j] = max(value + knapsack[i-1][j-weight], knapsack[i-1][j])
 
-min_val = 1e9
-for i in range(1, h+1):
-	t, b = bisect_left(up, (h+1)-i), bisect_left(down, i)
-	total = n - (t+b)
-	if total < min_val:
-		min_val = total
-		cnt = 1
-	elif total == min_val:
-		cnt += 1
+print(knapsack[n][k])
