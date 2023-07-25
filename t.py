@@ -1,23 +1,21 @@
-n, k = map(int, input().split())
-coins = []
+n, m = map(int, input().split())
+time = []
 for _ in range(n):
-    s.append(int(input()))
+    time.append(int(input()))
 
-start, end = min(s), max(s)
+start, end = min(time), max(time) * m
+ans = end
 
 while start <= end:
     mid = (start + end) // 2
-    charge = mid
-    num = 1
+    total = 0
     for i in range(n):
-        if charge < s[i]:
-            charge = mid
-            num += 1
-        charge -= s[i]
-
-    if num > m or mid < max(s):
-        start = mid + 1
-    else:
+        total += mid // time[i]
+    
+    if total >= m:
         end = mid - 1
-print(mid)
-
+        ans = min(ans, mid)
+    else:
+        start = mid + 1
+        
+print(ans)
