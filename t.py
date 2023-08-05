@@ -21,5 +21,4 @@ def sol(color):
                 count = min(count, dp[i+k-1][j+k-1]-dp[i+k-1][j-1]-dp[i-1][j+k-1]+dp[i-1][j-1])
             
         return count
-
     
