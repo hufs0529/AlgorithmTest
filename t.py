@@ -1,23 +1,26 @@
 n, m = map(int, input().split())
-s = []
-for _ in range(n):
-    s.append(int(input()))
+jewels = []
+for _ in range(m):
+    jewels.append(int(input()))
 
-start, end = min(s), sum(s)
+start, end = 1, max(jewels)
+ans = end
 
 while start <= end:
-    mid = (start + end) // 2
-    charge = mid
-    num = 1
-    for i in range(n):
-        if charge < s[i]:
-            charge = mid
-            num += 1
-        charge -= s[i]
-    
-    if num > m or mid < max(s):
+    mid = (start + end)//2
+    tmp = 0
+    for jewel in jewels:
+        quot = jewel // mid
+        remain = jewel % mid
+
+        tmp += quot
+        if remain > 0:
+            tmp += 1
+
+    if tmp > n:
         start = mid + 1
     else:
+        ans = max(ans, mid)
         end = mid - 1
-        k = mid
-print(k)
+
+print(ans)
