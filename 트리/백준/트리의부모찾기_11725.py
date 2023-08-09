@@ -7,11 +7,10 @@ for _ in range(n-1):
     tree[a].append(b)
     tree[b].append(a)
 
-ans = [0] * (n+1)
-
-def bfs(num):
-    queue = deque()
-    queue.append(num)
+ans = [0]*(n+1)
+queue = deque()
+queue.append(1)
+def bfs():
     while queue:
         q = queue.popleft()
         for i in tree[q]:
@@ -19,7 +18,7 @@ def bfs(num):
                 ans[i] = q
                 queue.append(i)
 
-bfs(1)
+bfs()
 res = ans[2:]
 for x in res:
     print(x)
