@@ -1,21 +1,33 @@
-vowels = ['a', 'e', 'i', 'o', 'u']
-l, c = map(int, input().split())
-s = sorted(list(map(str, input().split())))
-ans = []
+from collections import deque
 
-def dfs(cnt, idx):
-    if cnt == l:
-        vo, co = 0, 0
-        for i in range(l):
-            if ans[i] in vowels:
-                vo += 1
-            else:
-                co += 1
-        if vo >= 1 and co >= 2:
-            print("".join(map(str, ans)))
-    
-    for i in range(idx, c):
-        ans.append(s[i])
-        dfs(cnt+1, i+1)
-        ans.pop()
-dfs(0, 0)
+dx = [0, 0, -1, 1]
+dy = [-1, 1, 0, 0]
+t = int(input())
+
+for _ in range(t):
+    m, n, k = map(int, input().split())
+    graph = [[0 for _ in range(m)]for _ in range(n)]
+
+    for i in range(k):
+        a, b = map(int, input().split())
+        graph[b][a] = 1
+
+    cnt = 0
+    for i in range(n):
+        for j in range(m):
+            if graph[i][j] == 1:
+                cnt += bfs(i, j)
+
+
+def bfs(x, y):
+    queue = deque([x, y])
+    while queue:
+        x, y = queue.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+
+            if 0 <= nx < n and 0 <= ny < m and graph[nx][ny] == 1:
+                queue.append((nx, ny))
+                graph[nx][ny] = 2
+    return 1
