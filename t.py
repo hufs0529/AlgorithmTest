@@ -1,33 +1,15 @@
-from collections import deque
+n = int(input())
+time = [[0] * 2 for _ in range(n)]
+for i in range(n):
+    s, e = map(int, input().split())
+    time[i][0] = s
+    time[i][1] = e
+cnt = 1
+time.sort(key=lambda x:(x[1], x[0]))
+end_time = time[0][1]
+for i in range(1, n):
+    if end_time <= time[i][0]:
+        cnt += 1
+        end_time = time[i][1]
 
-dx = [0, 0, -1, 1]
-dy = [-1, 1, 0, 0]
-t = int(input())
-
-for _ in range(t):
-    m, n, k = map(int, input().split())
-    graph = [[0 for _ in range(m)]for _ in range(n)]
-
-    for i in range(k):
-        a, b = map(int, input().split())
-        graph[b][a] = 1
-
-    cnt = 0
-    for i in range(n):
-        for j in range(m):
-            if graph[i][j] == 1:
-                cnt += bfs(i, j)
-
-
-def bfs(x, y):
-    queue = deque([x, y])
-    while queue:
-        x, y = queue.popleft()
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
-
-            if 0 <= nx < n and 0 <= ny < m and graph[nx][ny] == 1:
-                queue.append((nx, ny))
-                graph[nx][ny] = 2
-    return 1
+print(cnt)
