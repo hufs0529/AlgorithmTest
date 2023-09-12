@@ -1,21 +1,14 @@
+target = int(input())
 n = int(input())
-words = []
-for _ in range(n):
-    words.append(input())
+broken = list(map(int, input().split()))
 
-for word in words:
-    left, right = 0, len(word) - 1
-    if word[left] == word[right]:
-        left += 1
-        right -= 1
-    else:
-        if left < right-1:
-            temp = word[:right] + word[right+1:]
-            if temp[:] == temp[::-1]:
-                print(1)
-        if left + 1 < right:
-            temp = word[:left] + word[left+1:]
-            if temp[:] == temp[::-1]:
-                print(1)
-        print(2)
-        
+min_count = abs(100 - target)
+
+for nums in range(1000001):
+    nums = str(nums)
+    for j in range(len(nums)):
+        if int(nums[j]) in broken:
+            break
+        elif j == len(nums) - 1:
+            min_count = min(min_count, abs(int(nums) - target + len(nums)))
+
