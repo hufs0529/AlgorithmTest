@@ -1,18 +1,19 @@
-from collections import Counter
-words = input()
-check_word = Counter(words)
-cnt = 0
-result = ''
-mid = ''
+n, m = map(int, input().split())
+lines = []
+result = 0
+for _ in range(m):
+    a, b = map(int, input().split()) # 세트, 낱개 가격
+    lines.append((a, b))
 
-for key, value in list(check_word.items()):
-    if value %2 == 1:
-        cnt += 1
-        mid = key
-        if cnt >= 2:
-            print("I'm Sorry Hansoo")
-            exit()
+bulk = min(row[0] for row in lines)
+indiv = min(row[1] for row in lines)
 
-for key, value in check_word.items():
-    result += (key * (value//2))
-print(result + mid + result[::-1])
+while n > 0:
+    if n >= 6:
+        result += bulk
+        n -= 6
+    else:
+        result += indiv
+        n -= 1
+
+print(result)
