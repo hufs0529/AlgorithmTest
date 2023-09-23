@@ -1,18 +1,23 @@
-from itertools import combinations
+l, c = map(int, input().split())
+words = sorted(list(input().split()))
+ans = []
+vowels = ['a','e','i','o','u']
 
-L, C = map(int, input().split())
-vowels = ['a','e','o','u']
-chars = sorted(list(map(str, input().split())))
-res = 0
+def dfs(depth, idx):
+    if depth == l:
+        vo, co = 0, 0
+        for i in range(l):
+            if ans[i] in vowels:
+                vo += 1
+            else:
+                co += 1
+        if vo >= 1 and co >= 2:
+            print("".join(ans))
+        return
 
-for c in list(combinations(chars, L)):
-  vo, co = 0, 0
-  for char in c:
-    if char in vowels:
-      vo += 1
-    else:
-      co += 1
-  if vo > 0 and co > 1:
-    res.append(''.join(c))
-    
-    
+    for i in range(idx, c):
+        ans.append(words[i])
+        dfs(depth+1, i+1)
+        ans.pop()
+
+dfs(0, 0)
