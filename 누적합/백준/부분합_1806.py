@@ -6,7 +6,7 @@ sum = 0
 
 while True:
     if sum >= s:
-        min_val = min(min_val, right-left)
+        min_val = min(min_val, right - left)
         sum -= nums[left]
         left += 1
     elif right == n:
@@ -15,7 +15,4 @@ while True:
         sum += nums[right]
         right += 1
 
-if min_val == 1e9:
-    print(0)
-else:
-    print(min_val)
+print(min_val)
