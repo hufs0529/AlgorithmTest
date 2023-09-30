@@ -11,4 +11,3 @@ for i in range(n):
         if tmp == k:
             cnt += 1
 
-print(cnt)
