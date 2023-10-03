@@ -1,10 +1,14 @@
-n, k = map(int, input().split())
-dp = [[0] * (k+1) for _ in range(n+1)]
-dp[0][0] = 1
+n, m = map(int, input().split())
+nums = sorted(list(map(int, input().split())))
+tmp = []
 
-for i in range(0, n+1):
-    for j in range(1, k+1):
-        dp[i][j] = dp[i-1][j] + dp[i][j-1]
+def dfs(start):
+    if len(tmp) == m:
+        print(*tmp)
+        return
+    for i in range(start, n):
+        tmp.append(nums[i])
+        dfs(i)
+        tmp.pop()
 
-print(dp)
-print(dp[n][k] % 1000000000)
+dfs(0)
