@@ -1,21 +1,17 @@
-def dfs(depth):
-    if depth == k:
-        comb.add("".join(map(str, tmp)))
-        return
+n, s = map(int, input().split())
+sequence = list(map(int, input().split()))
+min_val = n+1
+left, right, sum = 0, 0, 0
 
-    for i in range(n):
-        if check[i]:
-            continue
-        tmp.append(nums[i])
-        check[i] = 1
-        dfs(depth+1)
-        tmp.pop()
-        check[i] = 0
+while True:
+    if sum >= s:
+        min_val = min(min_val, right-left)
+        sum -= sequence[left]
+        left += 1
+    elif right == n:
+        break
+    else:
+        sum += sequence[right]
+        right += 1
 
-
-n, k = int(input()), int(input())
-nums = [int(input()) for _ in range(n)]
-tmp, comb = [], set()
-check = [0]*n
-dfs(0)
-print(len(comb))
+print(min_val)
