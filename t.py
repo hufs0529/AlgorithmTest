@@ -1,17 +1,13 @@
-n, s = map(int, input().split())
-sequence = list(map(int, input().split()))
-min_val = n+1
-left, right, sum = 0, 0, 0
+r, c, q = map(int, input().split())
+matrix = [list(map(int, input().split())) for _ in range(r)]
+dp = [[0 for _ in range(c + 1)] for _ in range(r + 1)]
 
-while True:
-    if sum >= s:
-        min_val = min(min_val, right-left)
-        sum -= sequence[left]
-        left += 1
-    elif right == n:
-        break
-    else:
-        sum += sequence[right]
-        right += 1
+for i in range(1, r+1):
+    for j in range(1, c+1):
+        dp[i][j] = dp[i-1][j] + dp[i][j-1] + matrix[i-1][j-1] - dp[i-1][j-1]
 
-print(min_val)
+for i in range(q):
+    x1, y1, x2, y2 = map(int, input().split())
+    ans = dp[x2][y2] - dp[x1-1][y2] - dp[x2-1][y1] + dp[x1-1][y1-1]
+    div = (x2-x1+1)*(y2-y1+1)
+    print(ans//div)
