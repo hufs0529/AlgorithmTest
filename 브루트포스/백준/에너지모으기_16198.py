@@ -17,7 +17,3 @@ while n > 2:
     n -= 1
 
 print(total)
-
-# 1 2 3 4
-# 1 2 4 / n=3, sum = 8
-# 1 4 /n=2, sum = 12
