@@ -1,12 +1,14 @@
-import heapq
-heap = []
 n = int(input())
+s = list(map(int, input().split()))
+stack = []
+answer = [0] * n
+
 for i in range(n):
-    num = int(input())
-    if num != 0:
-        heapq.heappush(heap, -num)
-    else:
-        try:
-            print(-1 * heapq.heappop(heap))
-        except:
-            print(0)
+    while stack:
+        if s[stack[-1][0]] < s[i]:
+            stack.pop()
+        else:
+            answer[i] = stack[-1][0] + 1
+            break
+    stack.append((i, s[i]))
+print(*answer)
