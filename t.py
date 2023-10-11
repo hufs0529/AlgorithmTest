@@ -15,3 +15,4 @@ else:
         answer += (t1 + t2)
         heapq.heappush(heap, t1+t2)
     print(answer)
+    
