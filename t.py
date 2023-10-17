@@ -1,16 +1,11 @@
-a = input()
-b = input()
+n = int(input())
+line = list(map(int, input().split()))
+dp = [1] * n
 
-stack = []
-ex_len = len(b)
+for i in range(1, n):
+    for j in range(i):
+        if line[j] < line[i]:
+            dp[i] = max(dp[i], dp[j] + 1)
 
-for i in range(len(a)):
-    stack.append(a[i])
-    if ''.join(stack[-ex_len:]) == b:
-        for _ in range(ex_len):
-            stack.pop()
-
-if stack:
-    print(''.join(stack))
-else:
-    print('FRULA')
+result = max(dp)
+print(result)
