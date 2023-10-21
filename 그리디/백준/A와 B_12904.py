@@ -1,4 +1,4 @@
-def solve(s, t):
+def dfs(s, t):
     while len(t) >= len(s):
         if t == s:
             return True
