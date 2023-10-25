@@ -1,6 +1,5 @@
 v, e = map(int, input().split())
 parent = [0] * (v + 1)
-
 for i in range(1, v + 1):
   parent[i] = i
 

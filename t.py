@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 n = int(input())
 graph = []
 for _ in range(n):
@@ -18,3 +19,6 @@ def pooling(size, x, y):
     return answer[-2]
 
 print(pooling(n, 0, 0))
+=======
+
+>>>>>>> a6aea9b819bd6904ff210b1e6aa48ffe4bfebd05
