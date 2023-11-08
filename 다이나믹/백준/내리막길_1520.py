@@ -21,6 +21,7 @@ def dfs(x, y):
             ways += dfs(nx, ny)
     
     dp[x][y] = ways
+    
     return dp[x][y]
 
 print(dfs(0, 0))
