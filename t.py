@@ -1,24 +1,17 @@
-n = int(input())
-cost = list(map(int, input().split()))
-joy = list(map(int, input().split()))
-ans = 0
+d,k = map(int,input().split())
 
-def dfs(idx, cur_joy, cur_life):
-    global ans
+dp = [0 for i in range(d)]
+dp[0],dp[1] = 1,1
 
-    if cur_life <= 0:
-        prev_joy = cur_joy - joy[idx-1]
-        if prev_joy > ans:
-            ans = prev_joy
-        return
+while(True):
+    for i in range(2,d):
+        dp[i] = dp[i-1]+dp[i-2]
     
-    if idx == n:
-        if cur_joy > ans:
-            ans = cur_joy
-        return
-
-    dfs(idx+1, cur_joy + joy[idx], cur_life - cost[idx])
-    dfs(idx+1, cur_joy, cur_life)
-
-dfs(0, 0, 100)
-print(ans)
+    if dp[d-1] == k:
+        print(dp[0],dp[1],sep="\n")
+        break
+    elif dp[-1] > k:
+        dp[0] += 1
+        dp[1] = dp[0]
+    else:
+        dp[1] += 1
